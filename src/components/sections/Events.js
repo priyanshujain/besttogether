@@ -88,9 +88,18 @@ const EventDetails = ({ isOpen, handleModal, data, ...props }) => {
           Free
         </p>
         <DetailsSection>
-          <div style={{ flex: 1, marginRight: 60 }}>
+          <EventDescription>
             <p style={{"white-space": "pre-wrap"}}>{data?.['Details']}</p>
-            <h3 style={{ margin: '72px 0 24px 0' }}>Register</h3>
+          </EventDescription>
+          <RightContainer>
+            <h3>{moment(data?.['Time']).format('dddd, MMM DD, YYYY')}</h3>
+            <p style={{ fontSize: 18 }}>
+              Time: {moment(data?.['Time']).format('hh:mm a')}
+            </p>
+            <p style={{ fontSize: 18 }}>Location: Online via google meet</p>
+            <p style={{ fontSize: 18 }}>Seats: {data?.['Seats']}</p>
+          </RightContainer>
+          <h3 style={{ margin: '72px 0 24px 0' }}>Register</h3>
             <Formik
               initialValues={{
                 email: '',
@@ -154,15 +163,6 @@ const EventDetails = ({ isOpen, handleModal, data, ...props }) => {
                 </Form>
               )}
             </Formik>
-          </div>
-          <RightContainer>
-            <h3>{moment(data?.['Time']).format('dddd, MMM DD, YYYY')}</h3>
-            <p style={{ fontSize: 18 }}>
-              Time: {moment(data?.['Time']).format('hh:mm a')}
-            </p>
-            <p style={{ fontSize: 18 }}>Location: Online via google meet</p>
-            <p style={{ fontSize: 18 }}>Seats: {data?.['Seats']}</p>
-          </RightContainer>
         </DetailsSection>
       </Container>
     </Modal>
@@ -247,7 +247,7 @@ const UsedBy = () => {
                     <button
                       onClick={() => setEventId(item.ID)}
                       className="btn-base btn-contained"
-                      style={{ width: '100%' }}
+                      style={{ width: '100%', marginTop: "20px" }}
                     >
                       Register
                     </button>
@@ -360,6 +360,17 @@ const DetailsSection = styled.div`
     flex-direction: column;
   }
 `;
+
+
+const EventDescription = styled.div`
+  flex: 1;
+  margin-right: 60px;
+
+@media (max-width: ${props => props.theme.screen.md}) {
+  margin-right: 0;
+}
+`;
+
 
 const RightContainer = styled.div`
   @media (max-width: ${props => props.theme.screen.md}) {
