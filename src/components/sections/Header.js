@@ -34,7 +34,7 @@ const Header = () => (
               <div style={{ marginTop: 32 }}>
                 <AnchorLink
                   href="#sessions"
-                  className="btn-base btn-outlined btn-white"
+                  className="btn-base btn-outlined btn-black"
                   style={{ textDecoration: 'none' }}
                 >
                   View Upcoming Sessions

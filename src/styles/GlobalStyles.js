@@ -87,7 +87,7 @@ const GlobalStyles = createGlobalStyle`
 
   input:focus,
   input:hover {
-    border-color: ${props => props.theme.color.primary};
+    border-color: ${props => props.theme.color.secondary};
     outline: 0;
   }
 
@@ -104,32 +104,28 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .btn-contained {
-    background-color: ${props => props.theme.color.primary};
+    background-color: ${props => props.theme.color.secondary};
     color: white;
   }
 
   .btn-outlined {
     background-color: transparent;
-    color: ${props => props.theme.color.primary};
-    border: 2px solid ${props => props.theme.color.primary};
+    color: ${props => props.theme.color.secondary};
+    border: 2px solid ${props => props.theme.color.secondary};
     transition: color 150ms ease-in, background-color 150ms ease-in, border-color 150ms ease-in;
     /* transition: background-color 500ms ease-in;
     transition:  500ms ease-in; */
   }
 
-  .btn-outlined:hover {
-    border-color: #fff !important;
-  }
-
-  .btn-outlined.btn-white {
+  .btn-outlined.btn-black {
     background-color: transparent;
-    color: white;
-    border: 2px solid white;
+    color: ${props => props.theme.color.black.light};
+    border: 2px solid ${props => props.theme.color.black.light};
   }
 
-  .btn-outlined:hover {
-    background-color: ${props => props.theme.color.primary};
-    border-color: ${props => props.theme.color.primary};
+  .btn-outlined:not(.btn-black):hover {
+    background-color: ${props => props.theme.color.secondary};
+    border-color: ${props => props.theme.color.secondary};
     color: white;
   }
 
