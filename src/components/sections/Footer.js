@@ -42,8 +42,9 @@ const Footer = () => (
               <h2>Best Together</h2>
               <p>An effort towards helping people during COVID crisis.</p>
               <p>
+                <br />
                 Created with <span className="red">&#9829;</span> at{' '}
-                <ExternalLink href="https://loqal.us">Loqal</ExternalLink>.
+                <ExternalLink href="https://loqal.us">Loqal.Us</ExternalLink>
               </p>
             </Copyright>
             <SocialIcons>
