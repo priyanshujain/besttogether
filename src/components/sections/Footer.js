@@ -10,9 +10,7 @@ import GithubIcon from '@static/icons/github.svg';
 import InstagramIcon from '@static/icons/instagram.svg';
 import TwitterIcon from '@static/icons/twitter.svg';
 
-const SOCIAL = [
-
-];
+const SOCIAL = [];
 
 const Footer = () => (
   <StaticQuery
@@ -42,9 +40,12 @@ const Footer = () => (
           <StyledContainer>
             <Copyright>
               <h2>Best Together</h2>
-              <span>
-                An effort towards helping people during COVID crisis.
-              </span>
+              <p>An effort towards helping people during COVID crisis.</p>
+              <p>
+                <br />
+                Created with <span className="red">&#9829;</span> at{' '}
+                <ExternalLink href="https://loqal.us">Loqal.Us</ExternalLink>
+              </p>
             </Copyright>
             <SocialIcons>
               {SOCIAL.map(({ icon, link }) => (
@@ -52,6 +53,11 @@ const Footer = () => (
                   <img src={icon} alt="link" />
                 </ExternalLink>
               ))}
+              <EmailUs>
+              <a href="mailto:teambesttogether@gmail.com">
+              Email Us
+              </a>
+              </EmailUs>
             </SocialIcons>
           </StyledContainer>
         </FooterWrapper>
@@ -74,6 +80,18 @@ const SocialIcons = styled.div`
   }
 `;
 
+
+const EmailUs = styled.div`
+  a {
+    font-size: 16px;
+    color: #4a4a4a;
+    font-weight: 600;
+    text-decoration: None;
+  }
+
+`
+
+
 const FooterWrapper = styled.footer`
   background-color: ${props => props.theme.color.primary};
   padding: 32px 0;
@@ -81,7 +99,12 @@ const FooterWrapper = styled.footer`
 
 const Copyright = styled.div`
   font-family: ${props => props.theme.font.secondary};
-  ${props => props.theme.font_size.small};
+  p {
+    ${props => props.theme.font_size.small};
+  }
+  .red {
+    color: red;
+  }
   color: ${props => props.theme.color.black.regular};
 
   a {

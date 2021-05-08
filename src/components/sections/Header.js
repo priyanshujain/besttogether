@@ -5,15 +5,13 @@ import Img from 'gatsby-image';
 
 import { Container } from '@components/global';
 import ExternalLink from '@common/ExternalLink';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 const Header = () => (
   <StaticQuery
     query={graphql`
       query {
-        hero: file(
-          sourceInstanceName: { eq: "art" }
-          name: { eq: "hero" }
-        ) {
+        hero: file(sourceInstanceName: { eq: "art" }, name: { eq: "hero" }) {
           childImageSharp {
             fluid(maxWidth: 1400) {
               ...GatsbyImageSharpFluid_withWebp_tracedSVG
@@ -30,14 +28,18 @@ const Header = () => (
               <Img fluid={data.hero.childImageSharp.fluid} />
             </Art>
             <Text>
-              <h1>
-              connect to free emotional support during the pandemic
-
-              </h1>
+              <h1>connect to free emotional support during the pandemic</h1>
               <br />
-              <p>
-              Need someone to talk to? Join our online support groups.
-              </p>
+              <p>Need someone to talk to? Join our online support groups.</p>
+              <div style={{ marginTop: 32 }}>
+                <AnchorLink
+                  href="#sessions"
+                  className="btn-base btn-outlined btn-black"
+                  style={{ textDecoration: 'none' }}
+                >
+                  View Upcoming Sessions
+                </AnchorLink>
+              </div>
             </Text>
           </Grid>
         </Container>

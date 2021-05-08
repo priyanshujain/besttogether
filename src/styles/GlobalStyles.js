@@ -63,6 +63,78 @@ const GlobalStyles = createGlobalStyle`
     cursor: pointer;
   }
 
+  input {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    display: inline-block;
+    width: 100%;
+    height: 32px;
+    padding: 4px 11px;
+    color: rgba(0, 0, 0, .65);
+    font-size: 14px;
+    line-height: 1.5;
+    background-color: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+  }
+
+  input.large {
+    height: 48px;
+    padding: 6px 11px;
+    font-size: 16px;
+  }
+
+  input:focus,
+  input:hover {
+    border-color: ${props => props.theme.color.secondary};
+    outline: 0;
+  }
+
+  .btn-base {
+    outline: none;
+    user-select: none;
+    border: 0;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 1px;
+    /* text-transform: uppercase; */
+  }
+
+  .btn-contained {
+    background-color: ${props => props.theme.color.secondary};
+    color: white;
+  }
+
+  .btn-outlined {
+    background-color: transparent;
+    color: ${props => props.theme.color.secondary};
+    border: 2px solid ${props => props.theme.color.secondary};
+    transition: color 150ms ease-in, background-color 150ms ease-in, border-color 150ms ease-in;
+    /* transition: background-color 500ms ease-in;
+    transition:  500ms ease-in; */
+  }
+
+  .btn-outlined.btn-black {
+    background-color: transparent;
+    color: ${props => props.theme.color.black.light};
+    border: 2px solid ${props => props.theme.color.black.light};
+  }
+
+  .btn-outlined:not(.btn-black):hover {
+    background-color: ${props => props.theme.color.secondary};
+    border-color: ${props => props.theme.color.secondary};
+    color: white;
+  }
+
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
   a {
     cursor: pointer;
   }
