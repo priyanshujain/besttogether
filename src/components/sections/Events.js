@@ -61,6 +61,7 @@ const EventDetails = ({ isOpen, handleModal, data, ...props }) => {
       onRequestClose={handleModal}
       style={customStyles}
       contentLabel="Example Modal"
+      preventScroll={true}
     >
       <Container>
         <div
@@ -115,6 +116,7 @@ const EventDetails = ({ isOpen, handleModal, data, ...props }) => {
                   var res = await postRegisterUser(requestData);
                   if (res.ok) {
                     actions.resetForm();
+                    handleModal();
                     alert("We've successfully completed your registration!");
                   } else throw new Error('failed');
                 } catch (error) {
@@ -157,7 +159,7 @@ const EventDetails = ({ isOpen, handleModal, data, ...props }) => {
               Time: {moment(data?.['Time']).format('hh:mm a')}
             </p>
             <p style={{ fontSize: 18 }}>Location: Online via google meet</p>
-            <p style={{ fontSize: 18 }}>Seats: 10</p>
+            <p style={{ fontSize: 18 }}>Seats: {data?.['Seats']}</p>
           </RightContainer>
         </DetailsSection>
       </Container>
@@ -211,45 +213,47 @@ const UsedBy = () => {
           />
           <h1>Upcoming Group Sesssions</h1>
           <LogoGrid></LogoGrid>
-          {events.map(item => {
-            return (
-              <Card key={item.ID}>
-                <div>
-                  <h3>{moment(item['Time']).format('dddd, MMM DD, YYYY')}</h3>
-                  <p style={{ color: 'rgba(9, 140, 107, 1)', fontSize: 14 }}>
-                    Free
-                  </p>
-                  <p style={{ fontSize: 18 }}>
-                    Time: {moment(item['Time']).format('hh:mm a')}
-                  </p>
-                  <p style={{ fontSize: 18 }}>
-                    Location: Online via google meet
-                  </p>
-                  <p style={{ fontSize: 18 }}>Seats: 10</p>
-                </div>
-                <div>
+          {events
+            .filter(item => new Date(item['Time']) > new Date())
+            .map(item => {
+              return (
+                <Card key={item.ID}>
                   <div>
-                    <button
-                      onClick={() => setEventId(item.ID)}
-                      className="btn-base btn-contained"
-                      style={{ width: '100%' }}
-                    >
-                      Register
-                    </button>
+                    <h3>{moment(item['Time']).format('dddd, MMM DD, YYYY')}</h3>
+                    <p style={{ color: 'rgba(9, 140, 107, 1)', fontSize: 14 }}>
+                      Free
+                    </p>
+                    <p style={{ fontSize: 18 }}>
+                      Time: {moment(item['Time']).format('hh:mm a')}
+                    </p>
+                    <p style={{ fontSize: 18 }}>
+                      Location: Online via google meet
+                    </p>
+                    <p style={{ fontSize: 18 }}>Seats: {item['Seats']}</p>
                   </div>
-                  <div style={{ marginTop: 16 }}>
-                    <button
-                      onClick={() => setEventId(item.ID)}
-                      className="btn-base btn-outlined"
-                      style={{ width: '100%' }}
-                    >
-                      View Details
-                    </button>
+                  <div>
+                    <div>
+                      <button
+                        onClick={() => setEventId(item.ID)}
+                        className="btn-base btn-contained"
+                        style={{ width: '100%' }}
+                      >
+                        Register
+                      </button>
+                    </div>
+                    <div style={{ marginTop: 16 }}>
+                      <button
+                        onClick={() => setEventId(item.ID)}
+                        className="btn-base btn-outlined"
+                        style={{ width: '100%' }}
+                      >
+                        View Details
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </Card>
-            );
-          })}
+                </Card>
+              );
+            })}
         </div>
         <Art>
           <Img fluid={data.art_story.childImageSharp.fluid} />
