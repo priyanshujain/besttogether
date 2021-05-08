@@ -14,6 +14,22 @@ const FAQS = [
       </>
     ),
   },
+  {
+    title: 'What is a support group?',
+    content: () => (
+      <>
+      In a support group, members provide each other with various types of help, usually nonprofessional and nonmaterial, for a particular shared, usually burdensome, characteristic. Members with the same issues can come together for sharing coping strategies, to feel more empowered and for a sense of community.
+      </>
+    ),
+  },
+  {
+    title: 'How do I join BestTogether support group?',
+    content: () => (
+      <>
+        You can register for a support group session at <a href="https://besttogether.in">besttogether.in</a>. BestTogeter support group sessions are completely online and free. We will send you an online meeting link two hours prior to session timing.
+      </>
+    ),
+  },
 ];
 
 const Faq = () => (
