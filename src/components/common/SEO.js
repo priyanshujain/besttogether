@@ -2,13 +2,26 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 const SEO_DATA = {
-  description: 'An Best Together gatsby starter',
-  title: 'Best Together',
-  url: '',
-  author: 'ajayns',
-  keywords: ['gatsby', 'site', 'Best Together'],
+  description:
+    'During these times, we want to focus not only on managing our stress and anxiety,\
+     but also on finding our resilience and hope through joy, laughter, and community.\
+      No one should suffer alone during this time, that why you invited\
+       to come join our support group.',
+  title: 'BestTogether- A community driven online support group',
+  url: 'besttogether.in',
+  author: '',
+  keywords: [
+    'Best Together',
+    'free online support group',
+    'anxiety',
+    'stress',
+    'covid',
+    'loneliness',
+    'support group',
+    'Best Together',
+  ],
   img: '',
-  twitterId: '@ajayns_',
+  twitterId: '',
   facebookId: '',
 };
 

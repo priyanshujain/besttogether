@@ -90,8 +90,8 @@ const EventDetails = ({ isOpen, handleModal, data, ...props }) => {
         </p>
         <DetailsSection>
           <div style={{ flex: 1, marginRight: 60 }}>
-            <p>{data?.['Details']}</p>
-            <h3 style={{ margin: '24px 0' }}>Register</h3>
+            <p style={{"white-space": "pre-wrap"}}>{data?.['Details']}</p>
+            <h3 style={{ margin: '72px 0 24px 0' }}>Register</h3>
             <Formik
               initialValues={{
                 email: '',
@@ -131,23 +131,26 @@ const EventDetails = ({ isOpen, handleModal, data, ...props }) => {
                     name="name"
                     component={CustomInputComponent}
                     label="Name"
+                    style={{"height": "50px"}}
                   />
                   <Field
                     name="city"
                     component={CustomInputComponent}
                     label="City"
+                    style={{"height": "50px"}}
                   />
                   <Field
                     name="email"
                     component={CustomInputComponent}
                     label="Email"
+                    style={{"height": "50px"}}
                   />
                   <button
                     className="btn-base btn-contained"
                     type="submit"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Submitting...' : 'Submit'}
+                    {isSubmitting ? 'Submitting...' : 'SUBMIT'}
                   </button>
                 </Form>
               )}

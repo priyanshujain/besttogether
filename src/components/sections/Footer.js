@@ -52,6 +52,11 @@ const Footer = () => (
                   <img src={icon} alt="link" />
                 </ExternalLink>
               ))}
+              <EmailUs>
+              <a href="mailto:teambesttogether@gmail.com">
+              Email Us
+              </a>
+              </EmailUs>
             </SocialIcons>
           </StyledContainer>
         </FooterWrapper>
@@ -73,6 +78,18 @@ const SocialIcons = styled.div`
     margin-top: 40px;
   }
 `;
+
+
+const EmailUs = styled.div`
+  a {
+    font-size: 16px;
+    color: #4a4a4a;
+    font-weight: 600;
+    text-decoration: None;
+  }
+
+`
+
 
 const FooterWrapper = styled.footer`
   background-color: ${props => props.theme.color.primary};
