@@ -54,7 +54,6 @@ const EventDetails = ({ isOpen, handleModal, data, ...props }) => {
       .email('Invalid email')
       .required('Required'),
   });
-  console.log({ data });
   return (
     <Modal
       isOpen={isOpen}
@@ -170,6 +169,8 @@ const EventDetails = ({ isOpen, handleModal, data, ...props }) => {
   );
 };
 
+const MAX_EVENTS = 3;
+
 const UsedBy = () => {
   const data = useStaticQuery(graphql`
     query {
@@ -188,6 +189,7 @@ const UsedBy = () => {
   const [isLoading, setLoading] = useState(false);
   const [events, setEvents] = useState([]);
   const [eventId, setEventId] = useState(null);
+  const [viewMoreTrue, setViewMore] = useState(false);
 
   useEffect(() => {
     (async function IIFE() {
@@ -197,14 +199,22 @@ const UsedBy = () => {
         var resJson = await res.json();
         setLoading(false);
         if (res.ok) {
-          console.log(resJson);
-          setEvents(resJson.records.map(item => item.fields));
+          const list = resJson.records
+            .map(item => item.fields)
+            .filter(item => new Date(item['Time']) > new Date());
+          setEvents(list);
         } else throw new Error('Request failed');
       } catch (error) {
         setLoading(false);
       }
     })();
   }, []);
+
+  var showEventsList =
+    events?.length > MAX_EVENTS && !viewMoreTrue
+      ? events?.slice?.(0, MAX_EVENTS)
+      : events;
+
   return (
     <Section id="sessions" accent>
       <StyledContainer>
@@ -216,47 +226,63 @@ const UsedBy = () => {
           />
           <h1>Upcoming Group Sesssions</h1>
           <LogoGrid></LogoGrid>
-          {events
-            .filter(item => new Date(item['Time']) > new Date())
-            .map(item => {
-              return (
-                <Card key={item.ID}>
+          {showEventsList.map(item => {
+            return (
+              <Card key={item.ID}>
+                <div>
+                  <h3>{moment(item['Time']).format('dddd, MMM DD, YYYY')}</h3>
+                  <p style={{ color: 'rgba(9, 140, 107, 1)', fontSize: 14 }}>
+                    Free
+                  </p>
+                  <p style={{ fontSize: 18 }}>
+                    Time: {moment(item['Time']).format('hh:mm a')}
+                  </p>
+                  <p style={{ fontSize: 18 }}>
+                    Location: Online via google meet
+                  </p>
+                  <p style={{ fontSize: 18 }}>Seats: {item['Seats']}</p>
+                </div>
+                <div>
                   <div>
-                    <h3>{moment(item['Time']).format('dddd, MMM DD, YYYY')}</h3>
-                    <p style={{ color: 'rgba(9, 140, 107, 1)', fontSize: 14 }}>
-                      Free
-                    </p>
-                    <p style={{ fontSize: 18 }}>
-                      Time: {moment(item['Time']).format('hh:mm a')}
-                    </p>
-                    <p style={{ fontSize: 18 }}>
-                      Location: Online via google meet
-                    </p>
-                    <p style={{ fontSize: 18 }}>Seats: {item['Seats']}</p>
+                    <button
+                      onClick={() => setEventId(item.ID)}
+                      className="btn-base btn-contained"
+                      style={{ width: '100%' }}
+                    >
+                      Register
+                    </button>
                   </div>
-                  <div>
-                    <div>
-                      <button
-                        onClick={() => setEventId(item.ID)}
-                        className="btn-base btn-contained"
-                        style={{ width: '100%' }}
-                      >
-                        Register
-                      </button>
-                    </div>
-                    <div style={{ marginTop: 16 }}>
-                      <button
-                        onClick={() => setEventId(item.ID)}
-                        className="btn-base btn-outlined"
-                        style={{ width: '100%' }}
-                      >
-                        View Details
-                      </button>
-                    </div>
+                  <div style={{ marginTop: 16 }}>
+                    <button
+                      onClick={() => setEventId(item.ID)}
+                      className="btn-base btn-outlined"
+                      style={{ width: '100%' }}
+                    >
+                      View Details
+                    </button>
                   </div>
-                </Card>
-              );
-            })}
+                </div>
+              </Card>
+            );
+          })}
+
+          {events?.length > MAX_EVENTS && !viewMoreTrue ? (
+            <button
+              className="btn-base btn-outlined btn-black"
+              style={{ display: 'block', marginLeft: 'auto' }}
+              onClick={() => setViewMore(true)}
+            >
+              View More
+            </button>
+          ) : events?.length > MAX_EVENTS && viewMoreTrue ? (
+            <button
+              className="btn-base btn-outlined btn-black"
+              style={{ display: 'block', marginLeft: 'auto' }}
+              onClick={() => setViewMore(false)}
+            >
+              View Less
+            </button>
+          ) : null}
         </div>
         <Art>
           <Img fluid={data.art_story.childImageSharp.fluid} />
@@ -297,12 +323,12 @@ const StyledContainer = styled(Container)`
 const Art = styled.figure`
   width: 600px;
   position: absolute;
-  top: -12%;
-  right: 50%;
+  top: calc(50% - 300px);
+  right: calc(50% + 32px);
 
   @media (max-width: ${props => props.theme.screen.lg}) {
-    top: 0;
-    right: 65%;
+    top: calc(50% - 250px);
+    right: calc(65% + 32px);
     width: 500px;
   }
 

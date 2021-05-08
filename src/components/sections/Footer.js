@@ -10,9 +10,7 @@ import GithubIcon from '@static/icons/github.svg';
 import InstagramIcon from '@static/icons/instagram.svg';
 import TwitterIcon from '@static/icons/twitter.svg';
 
-const SOCIAL = [
-
-];
+const SOCIAL = [];
 
 const Footer = () => (
   <StaticQuery
@@ -42,9 +40,11 @@ const Footer = () => (
           <StyledContainer>
             <Copyright>
               <h2>Best Together</h2>
-              <span>
-                An effort towards helping people during COVID crisis.
-              </span>
+              <p>An effort towards helping people during COVID crisis.</p>
+              <p>
+                Created with <span className="red">&#9829;</span> at{' '}
+                <ExternalLink href="https://loqal.us">Loqal</ExternalLink>.
+              </p>
             </Copyright>
             <SocialIcons>
               {SOCIAL.map(({ icon, link }) => (
@@ -98,7 +98,12 @@ const FooterWrapper = styled.footer`
 
 const Copyright = styled.div`
   font-family: ${props => props.theme.font.secondary};
-  ${props => props.theme.font_size.small};
+  p {
+    ${props => props.theme.font_size.small};
+  }
+  .red {
+    color: red;
+  }
   color: ${props => props.theme.color.black.regular};
 
   a {
